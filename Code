@@ -1,0 +1,115 @@
+-- Example 1: Basic button function (text-based)
+
+local function button_click()
+  print("Button clicked!")
+  -- Add your button's functionality here
+end
+
+print("[Click here]") -- Simulate a clickable button
+
+-- Simulate a click:
+button_click()
+
+-- Example 2: Using a simple GUI library (requires a GUI library like "love2d" or "defold")
+
+-- This example assumes you have a basic GUI framework set up.
+-- (This is a conceptual example, actual implementation will vary)
+
+local button = {
+  x = 100,
+  y = 100,
+  width = 100,
+  height = 50,
+  text = "Click Me",
+  onClick = function()
+    print("GUI Button clicked!")
+    -- Add your button's functionality here
+  end,
+  draw = function(self)
+    -- Draw a rectangle for the button
+    -- Draw the text
+  end,
+  isMouseOver = function(self, mouseX, mouseY)
+      return mouseX > self.x and mouseX < self.x + self.width and mouseY > self.y and mouseY < self.y + self.height
+  end,
+}
+
+-- Simulate a mouse click:
+local mouseX = 150
+local mouseY = 125
+
+if button.isMouseOver(button, mouseX, mouseY) then
+    button.onClick()
+end
+
+-- Example 3: Roblox Lua (using Roblox's GUI objects)
+
+-- Create a ScreenGui and Frame
+local screenGui = Instance.new("ScreenGui")
+screenGui.Parent = game.Players.LocalPlayer.PlayerGui
+
+local frame = Instance.new("Frame")
+frame.Size = UDim2.new(0, 200, 0, 100)
+frame.Position = UDim2.new(0.2, 0, 0.2, 0)
+frame.Parent = screenGui
+
+-- Create a TextButton
+local textButton = Instance.new("TextButton")
+textButton.Size = UDim2.new(1, 0, 1, 0)
+textButton.Text = "Click Me"
+textButton.Parent = frame
+
+-- Connect the button's click event
+textButton.MouseButton1Click:Connect(function()
+  print("Roblox button clicked!")
+  -- Add your button's functionality here
+end)
+
+-- Example 4: Using a callback function.
+
+local function createButton(text, callback)
+    local button = {
+        text = text,
+        onClick = callback,
+    }
+    return button;
+end
+
+local myButton = createButton("Another Button", function()
+    print("Callback button clicked!")
+end)
+
+myButton.onClick()
+
+-- Example 5: Command line buttons(text based)
+
+local function button1_click()
+    print("Button 1 clicked")
+end
+
+local function button2_click()
+    print("Button 2 clicked")
+end
+
+local function handle_input(input)
+    if input == "1" then
+        button1_click()
+    elseif input == "2" then
+        button2_click()
+    else
+        print("Invalid input")
+    end
+end
+
+print("1. Button 1")
+print("2. Button 2")
+
+-- Simulate user input
+local user_input = "1"
+handle_input(user_input)
+
+user_input = "2"
+handle_input(user_input)
+
+user_input = "3"
+handle_input(user_input)
